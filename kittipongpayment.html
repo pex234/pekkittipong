@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จ่ายเงินรายวัน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .reset-button {
+            background-color: #f44336;
+        }
+        .reset-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ระบบจ่ายเงินรายวัน</h1>
+        <p>ยอดเงินสะสม: <span id="total">0</span> บาท</p>
+        <button onclick="addPayment()">จ่ายเงินวันละ 100 บาท</button>
+        <button class="reset-button" onclick="resetPayment()">รีเซตยอดเงิน</button>
+    </div>
+
+    <script>
+        let totalAmount = 0;
+
+        // โหลดค่าจาก Local Storage เมื่อเปิดหน้าเว็บ
+        window.onload = function() {
+            const savedAmount = localStorage.getItem('totalAmount');
+            if (savedAmount) {
+                totalAmount = parseInt(savedAmount);
+                document.getElementById('total').innerText = totalAmount;
+            }
+        };
+
+        // ฟังก์ชันเพิ่มยอดเงิน
+        function addPayment() {
+            totalAmount += 100;
+            document.getElementById('total').innerText = totalAmount;
+            localStorage.setItem('totalAmount', totalAmount); // บันทึกค่าลง Local Storage
+        }
+
+        // ฟังก์ชันรีเซตยอดเงิน
+        function resetPayment() {
+            totalAmount = 0;
+            document.getElementById('total').innerText = totalAmount;
+            localStorage.setItem('totalAmount', totalAmount); // บันทึกค่าลง Local Storage
+        }
+    </script>
+</body>
+</html>
